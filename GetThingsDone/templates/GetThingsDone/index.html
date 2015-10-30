@@ -6,56 +6,63 @@
 <title> ToDoList </title>
 </head>
 <body>
-<div id="user">
+<div style="width:100%;">
+
+	<div id="user">
 			<div id="username">
-			<b>	How are your ToDos going,
-			{{ username }} ?
+			<b>	<h4>How are your ToDos going,</h4>
+			<h2 style="text-transform: uppercase">{{ username }} ?</h2>
 			</b>
 			</div>
 
-			<div class="parent"><a href="../logout">LogOut</a></div>
-        		<hr>
-    		</div>
+			<div  style="float:right;margin-right:30px"><a href="../logout"><h3>LogOut</h3></a></div>
+        	
+            <hr />  
+        </div>
+    <div style="width:60%; float:left; margin-left:10px;">	
 
-	  
 
+        <div class="container" style="margin-left:30px;">
+        {% for x in items %}
+            <div class="item{{x.id}}" style="margin-left:30px;border:1px dotted black;">
+	            <div class="heading" style="margin-left:30px;">
+		            <h3>{{ x.heading}}</h3>
+		            
+                </div>
+                <div style=" margin-left:530px;">
+                    <p>{{ x.name }} - {{ x.created|date:"D d M Y" }}</p>
+                </div>
+                <div class="content" style="margin-left:30px;">
+		            <p>{{ x.description }}</p>
+	            </div>
+                <form action="../delete/" method="POST" style="margin-left:30px;">
+	                <input type="hidden" name="itemId" value="{{x.id}}" />
+	                <input type="submit" value="Completed!" /> 
+                </form>
+            </div>
+            <br/>
+            {% endfor %}
+        </div>
 
-<div class="container">
-{% for x in items %}
-<div class="item{{x.id}}">
-	<div class="heading">
-		<h3>{{ x.heading}}</h3>
-		<p>{{ x.name }} - {{ x.created|date:"D d M Y" }}</p>
- </div>
- <div class="content">
-		<p>{{ x.description }}</p>
-	</div>
-<form action="../delete/" method="POST">
-	<input type="hidden" name="itemId" value="{{x.id}}" />
-	<input type="submit" value="Completed!" /> 
-</form>
+    </div>
+
+    <br><br><br>
+    <div style="float:right; width:30%;margin-left:10px;">
+        <h2 > Add TODOs</h2>
+        <form method = "POST" action="../addToDo/" style="font:30px">
+        {% csrf_token %}
+            Heading:<br>
+            <input type="text" id="heading" name="heading" placeholder="Title" required/>
+            <br><br>
+            ToDo: <br>
+            <!--input type="textarea" id="description" name="description" placeholder="Description"-->
+            <textarea name="description" id="description" placeholder="Description" required></textarea>
+        </input>
+            <br><br>
+            <input type="submit" id="submit" value="Add To List">
+        </form>
+    </div>
 </div>
-<hr />
-{% endfor %}
-</div>
-
-<br><br><br>
-<div>
-<h3 > Add TODOs</h3>
-<form method = "POST" action="../addToDo/">
-{% csrf_token %}
-Heading:<br>
-<input type="text" id="heading" name="heading" />
-<br>
-ToDo: <br>
-<input type="textarea" id="description" name="description">
-<br>
-<input type="submit" id="submit" value="Add To List">
-</form>
-</div>
-
-
-
 
 
 </body>

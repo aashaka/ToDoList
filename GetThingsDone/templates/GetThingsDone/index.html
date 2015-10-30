@@ -1,0 +1,62 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<script src="/static/js/jquery.min.js"></script>
+<script src="/static/js/delete.js"></script>
+<title> ToDoList </title>
+</head>
+<body>
+<div id="user">
+			<div id="username">
+			<b>	How are your ToDos going,
+			{{ username }} ?
+			</b>
+			</div>
+
+			<div class="parent"><a href="../logout">LogOut</a></div>
+        		<hr>
+    		</div>
+
+	  
+
+
+<div class="container">
+{% for x in items %}
+<div class="item{{x.id}}">
+	<div class="heading">
+		<h3>{{ x.heading}}</h3>
+		<p>{{ x.name }} - {{ x.created|date:"D d M Y" }}</p>
+ </div>
+ <div class="content">
+		<p>{{ x.description }}</p>
+	</div>
+<form action="../delete/" method="POST">
+	<input type="hidden" name="itemId" value="{{x.id}}" />
+	<input type="submit" value="Completed!" /> 
+</form>
+</div>
+<hr />
+{% endfor %}
+</div>
+
+<br><br><br>
+<div>
+<h3 > Add TODOs</h3>
+<form method = "POST" action="../addToDo/">
+{% csrf_token %}
+Heading:<br>
+<input type="text" id="heading" name="heading" />
+<br>
+ToDo: <br>
+<input type="textarea" id="description" name="description">
+<br>
+<input type="submit" id="submit" value="Add To List">
+</form>
+</div>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<html>
+<head>
+
+
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+<title>
+Log In
+</title>
+</head>
+<body>
+	<header>	
+     <div id="head">
+		<h1> Welcome to TODO List app</h1>
+		</div>
+</header>
+	
+<div id="content">
+<br/>
+
+<br/>
+<div id="intermediateparent">
+<div id="loginblock">
+
+<form action="../list/" method="POST">
+{% csrf_token %}
+
+<table id="login">
+
+<tr><td colspan="2">
+<span class = "words">Already Registered? Login here :<br></span> 
+</td></tr>
+<tr><td>
+Username<br>
+</td><td>
+<input type=text name='username' id='theusername'></input>
+</td></tr>
+
+<tr><td>
+Password<br>
+</td><td> 
+<input type=password name='password' id='thepassword'></input>
+</td></tr>
+
+<tr><td id="submitb" colspan="2">
+<button type="submit">LOG IN</button>
+</td></tr>
+
+</table>
+
+</form>
+
+</div>
+
+<br><br><br>
+<div id="signupblock">
+
+<form action='./' method="POST">
+
+{% csrf_token %}
+
+<table>
+
+<tr>
+<td colspan="2">
+<span class="words">Register Now :</span>
+</td>
+</tr>
+
+<tr><td>
+First Name
+</td><td>
+{{ form.first_name }}
+</td><td>
+{{ form.first_name.errors }}
+</td></tr>
+
+<tr><td>
+Last Name
+</td><td>
+{{ form.last_name }}
+</td><td>
+{{ form.last_name.errors }}
+</td></tr>
+
+<tr><td>
+Username
+</td><td>
+{{ form.username }}
+</td><td>
+{{ form.username.errors }}
+</td></tr>
+
+<tr><td>
+Password
+</td><td>
+{{ form.password }}
+</td><td>
+{{ form.password.errors }}
+</td></tr>
+
+<tr><td>
+E-mail
+</td><td>
+{{ form.email }}
+</td><td>
+{{ form.email.errors }}
+</td></tr>
+
+<tr><td colspan="2">
+<button type="submit">
+	SIGN UP
+</button>
+</td>
+</tr>
+</table>
+
+</div>
+
+</form>
+
+</div>
+
+<body>
+</html>
